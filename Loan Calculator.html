@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Payment calculator</title>
+</head>
+<style>
+body {
+background-color: white;
+margin: 0 auto;
+width: 700px;
+}
+ 
+span {
+color: red;
+}
+</style>
+<script>
+function ComputeLoan() {
+var L = document.getElementById("loan").value;
+var R = document.getElementById("rate").value;
+var years = document.getElementsByName('Year');
+var T;
+var intr=R/1200 //calculate the interest rate to plug into the formula
+for (var i = 0; i < years.length; i++) {
+if (years[i].checked) {
+T = years[i].value;
+X=T*12  //multiple the amount of years by 12 months for this formula to work
+}
+
+}
+var ans=L*intr/(1-(Math.pow(1/(1+intr),X)));
+document.getElementById("Monthlyloan").value = ans.toFixed(2);
+
+};
+</script>
+
+<body>
+<h1>Monthly Payment Calculator</h1>
+<form name="Pcalculator_form" id="Pcalculator_form">
+<fieldset>
+<legend></legend>
+<label for="loan">Enter Loan:</label>
+<input type="number" id="loan" autofocus><br><br>
+<label>Select Rate:</label>
+<select id="rate">
+<option value="3">3%</option>
+<option value="3.5">3.5%</option>
+<option value="4">4%</option>
+<option value="4.5">4.5%</option>
+<option value="5">5%</option>   
+</select>
+<br><br>
+
+<label>Select Term:</label><br>
+<input type="radio" name="Year" value="10" id="Year10" class="left" checked>10 year
+<br>
+<input type="radio" name="Year" value="15" id="Year15" class="left">15 year
+<br>
+<input type="radio" name="Year" value="30" id="Year30" class="left last">30 year<br>
+<br>
+<label>Monthly Payment:</label>
+<input id="Monthlyloan" /><br>
+<br>
+<input type="button" id="submit" onclick="ComputeLoan()" value="Compute Payment"><br>
+
+</form>
+</body>
+
+</html>
+
+
+
